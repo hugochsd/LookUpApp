@@ -186,6 +186,7 @@ class App(customtkinter.CTk):
                 outfile.write(f'RISK SCORE : {r.json()["data"]["report"]["risk_score"]["result"]}\n')
                 outfile.write(f'COUNTRY : {r.json()["data"]["report"]["information"]["country_name"]}\n')
                 outfile.write(f'CITY : {r.json()["data"]["report"]["information"]["city_name"]}\n')
+                outfile.write(f'REGION : {r.json()["data"]["report"]["information"]["region_name"]}\n')
                 outfile.write(f'ISP : {r.json()["data"]["report"]["information"]["isp"]}\n')
                 outfile.write(f'REVERSE DNS : {r.json()["data"]["report"]["information"]["reverse_dns"]}\n')
                 outfile.write(f'ANONIMITY : {r.json()["data"]["report"]["anonymity"]}\n')
