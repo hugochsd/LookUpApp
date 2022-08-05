@@ -46,7 +46,7 @@ class App(customtkinter.CTk):
 
         self.label_1 = customtkinter.CTkLabel(master=self.frame_left,
                                               text="SecOps LookUp Tool",
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              text_font=("Roboto Medium", 18))  # font name and size in px
         self.label_1.grid(row=1, column=0, pady=10, padx=10)
 
         self.button_1 = customtkinter.CTkButton(master=self.frame_left,
@@ -65,7 +65,7 @@ class App(customtkinter.CTk):
                                                         "          - Sheet name  label -> 'infected_ips' \n" +
                                                         "\n" +
                                                         "URL  - Column  label ->          'URL' \n" +
-                                                        "          - Sheet name  label -> 'URL' \n" ,
+                                                        "          - Sheet name  label -> 'URL' \n",
                                                    text_font=("Roboto Medium",10),
                                                    height=100,
                                                    corner_radius=6,  # <- custom corner radius
@@ -115,24 +115,28 @@ class App(customtkinter.CTk):
         self.radio_var = tkinter.IntVar(value=0)
 
         self.label_radio_group = customtkinter.CTkLabel(master=self.frame_right,
-                                                        text="Filter:")
+                                                        text="Filter:",
+                                                        text_font=("Roboto Medium", 16))
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
 
         self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            text="Cleared (.xslx)",
+                                                           text_font=("Roboto Medium", -14),
                                                            value=0)
         self.radio_button_1.grid(row=1, column=2, pady=10, padx=20, sticky="n")
 
         self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
-                                                           text="    Risky (.xlsx)",
+                                                           text="     Risky (.xlsx)",
+                                                           text_font=("Roboto Medium", -14),
                                                            value=1)
         self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
 
         self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
                                                            variable=self.radio_var,
                                                            text="     Report (.txt)",
+                                                           text_font=("Roboto Medium", -14),
                                                            value=2)
         self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
@@ -177,7 +181,6 @@ class App(customtkinter.CTk):
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for ip in IP_list:
-                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
@@ -196,7 +199,7 @@ class App(customtkinter.CTk):
 
         elif self.radio_button_1.check_state == True:
             for ip in IP_list:
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 if r.json()['data']['report']['blacklists']['detections'] == 0:
@@ -211,7 +214,7 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
         elif self.radio_button_2.check_state == True:
             for ip in IP_list:
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 if r.json()['data']['report']['blacklists']['detections'] > 0:
@@ -238,7 +241,7 @@ class App(customtkinter.CTk):
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for url in URL_list:
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 api = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={url}'
                 r = requests.get(api)
                 outfile.write('\n#####################################################################\n')
@@ -252,7 +255,7 @@ class App(customtkinter.CTk):
             outfile.close()
         elif self.radio_button_1.check_state:
             for URL in URL_list:
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] == 0:
@@ -267,7 +270,7 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
         elif self.radio_button_2.check_state:
             for url in URL_list:
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 api = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={url}'
                 r = requests.get(api)
                 if r.json()['data']['report']['domain_blacklist']['detections'] > 0:
