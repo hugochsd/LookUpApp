@@ -61,17 +61,17 @@ class App(customtkinter.CTk):
         self.label_info_2 = customtkinter.CTkLabel(master=self.frame_left,
                                                    text="Requirements :    \n" +
                                                         "\n" +
-                                                        "IPv4 - Column label ->           'SenderIPv4'   \n" +
-                                                        "          - Sheet name  label -> 'infected_ips' \n" +
+                                                        "IPv4 - Column label :           'IP'   \n" +
+                                                        "          - Sheet name  label : 'IP' \n" +
                                                         "\n" +
-                                                        "URL  - Column  label ->          'URL' \n" +
-                                                        "          - Sheet name  label -> 'URL' \n",
+                                                        "URL  - Column  label :          'URL' \n" +
+                                                        "          - Sheet name  label : 'URL' \n",
                                                    text_font=("Roboto Medium",10),
                                                    height=100,
                                                    corner_radius=6,  # <- custom corner radius
                                                    fg_color=("white", "gray38"),  # <- custom tuple-color
                                                    justify=tkinter.LEFT)
-        self.label_info_2.grid(column=0, row=5, sticky="nwe", padx=15, pady=15)
+        self.label_info_2.grid(column=0, row=8, sticky="nwe", padx=15, pady=15)
 
         self.label_mode = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
         self.label_mode.grid(row=9, column=0, pady=0, padx=20, sticky="w")
@@ -171,8 +171,8 @@ class App(customtkinter.CTk):
     def buttonIP_event(self):
         apivoid_key = '902345018587a33f9c99134d8011a6739a1a7873'
         self.filename = filedialog.askopenfilename(initialdir="C:/", title="Select A File", filetypes=(("Excel (.xlsx)", "*.xlsx"), ("All Files", "*.*")))
-        IPdf = pd.read_excel(self.filename, "infected_ips")
-        IP_list = IPdf['SenderIPv4'].values.tolist()
+        IPdf = pd.read_excel(self.filename, "IP")
+        IP_list = IPdf['IP'].values.tolist()
 
         goodIPs = []
         badIPs = []
