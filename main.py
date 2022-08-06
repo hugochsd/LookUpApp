@@ -7,7 +7,7 @@ import pandas as pd
 import time
 import requests
 
-customtkinter.set_appearance_mode("Light")  # Modes: "System" (standard), "Dark", "Light"
+customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
@@ -60,18 +60,6 @@ class App(customtkinter.CTk):
                                                    justify=tkinter.LEFT)
         self.label_info_1.grid(column=0, row=3, sticky="nwe", padx=15, pady=15)
 
-
-        #self.button_1 = customtkinter.CTkButton(master=self.frame_left,
-         #                                       text="IPv4 LookUp",
-          #                                      command=self.buttonIP_event)
-        #self.button_1.grid(row=1, column=0, pady=10, padx=20)
-
-        #self.button_2 = customtkinter.CTkButton(master=self.frame_left,
-         #                                       text="URL LookUp",
-          #                                      command=self.buttonURL_event)
-        #self.button_2.grid(row=3, column=0, pady=10, padx=20)
-
-
         self.label_info_2 = customtkinter.CTkLabel(master=self.frame_left,
                                                    text="Requirements :    \n" +
                                                         "\n" +
@@ -80,20 +68,15 @@ class App(customtkinter.CTk):
                                                         "\n" +
                                                         "URL  - Column  label :          'URL' \n" +
                                                         "          - Sheet name  label : 'URL' \n",
-                                                   text_font=("Roboto Medium",10),
+                                                   #text_font=("Roboto Medium",10),
                                                    height=155,
                                                    corner_radius=6,  # <- custom corner radius
                                                    fg_color=("white", "gray38"),  # <- custom tuple-color
                                                    justify=tkinter.LEFT)
         self.label_info_2.grid(column=0, row=8, sticky="nwe", padx=15, pady=15)
 
-        self.label_mode = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
-        self.label_mode.grid(row=9, column=0, pady=0, padx=20, sticky="w")
-
-        self.optionmenu_1 = customtkinter.CTkOptionMenu(master=self.frame_left,
-                                                        values=["Light", "Dark", "System"],
-                                                        command=self.change_appearance_mode)
-        self.optionmenu_1.grid(row=10, column=0, pady=10, padx=20, sticky="w")
+        self.switch_1 = customtkinter.CTkSwitch(master=self.frame_left,text="Dark Mode", offvalue="light", onvalue="Dark", command=self.change_appearance_mode)
+        self.switch_1.grid(row = 10, column = 0, pady=12, padx=10)
 
         # ============ frame_right ============
 
@@ -112,15 +95,7 @@ class App(customtkinter.CTk):
         self.frame_info.rowconfigure(0, weight=1)
         self.frame_info.columnconfigure(0, weight=1)
 
-        #self.label_info_1 = customtkinter.CTkLabel(master=self.frame_info,
-         #                                          text="Using APIVoid For IP and URL   \n" +
-          #                                              "https://docs.apivoid.com/      \n" +
-           #                                             "See requirements                 " ,
-            #                                       height=100,
-             #                                      corner_radius=6,  # <- custom corner radius
-              #                                     fg_color=("white", "gray38"),  # <- custom tuple-color
-               #                                    justify=tkinter.LEFT)
-        #self.label_info_1.grid(column=0, row=0, sticky="nwe", padx=15, pady=15)
+
 
         self.button_4 = customtkinter.CTkButton(master=self.frame_info,
                                                 text="IPv4 LookUp",
@@ -131,10 +106,6 @@ class App(customtkinter.CTk):
                                                 text="URL LookUp",
                                                 command=self.buttonURL_event)
         self.button_14.grid(row=1, column=0, pady=10, padx=20)
-
-
-        #self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
-        #self.progressbar.grid(row=4, column=0, sticky="ew", padx=15, pady=15)
 
 
 
@@ -168,10 +139,6 @@ class App(customtkinter.CTk):
                                                            value=2)
         self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
-        #self.slider_2 = customtkinter.CTkSlider(master=self.frame_right,
-         #                                       command=self.progressbar.set)
-        #self.slider_2.grid(row=4, column=0, columnspan=2, pady=30, padx=20, sticky="we")
-
 
         self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
         self.progressbar.grid(row=6, column=0, sticky="ew", padx=15, pady=15)
@@ -190,7 +157,7 @@ class App(customtkinter.CTk):
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         # set default values
-        self.optionmenu_1.set("Dark")
+        #self.optionmenu_1.set("Dark")
         self.radio_button_1.select()
         self.progressbar.set(0)
 
@@ -210,7 +177,7 @@ class App(customtkinter.CTk):
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for ip in IP_list:
-                time.sleep(0.3)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
@@ -232,7 +199,7 @@ class App(customtkinter.CTk):
 
         elif self.radio_button_1.check_state == True:
             for ip in IP_list:
-                time.sleep(0.3)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 if r.json()['data']['report']['blacklists']['detections'] == 0:
@@ -280,7 +247,7 @@ class App(customtkinter.CTk):
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for URL in URL_list:
-                #time.sleep(0.3)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
@@ -297,7 +264,7 @@ class App(customtkinter.CTk):
             outfile.close()
         elif self.radio_button_1.check_state:
             for URL in URL_list:
-                #time.sleep(0.5)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] == 0:
@@ -315,7 +282,7 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
         elif self.radio_button_2.check_state:
             for URL in URL_list:
-                #time.sleep(0.5)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] > 0:
@@ -332,8 +299,15 @@ class App(customtkinter.CTk):
             writer.save()
             self.progressbar.set(1)
 
-    def change_appearance_mode(self, new_appearance_mode):
-        customtkinter.set_appearance_mode(new_appearance_mode)
+    def change_appearance_mode(self):
+        if customtkinter.get_appearance_mode() == "Light":
+            value = "Dark"
+            customtkinter.set_appearance_mode(value)
+        elif customtkinter.get_appearance_mode() == "Dark":
+            value = "Light"
+            customtkinter.set_appearance_mode(value)
+
+
 
     def on_closing(self, event=0):
         self.destroy()
