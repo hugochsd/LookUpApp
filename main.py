@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import ttk
 import tkinter.messagebox
 import customtkinter
 from tkinter import filedialog
@@ -47,27 +48,40 @@ class App(customtkinter.CTk):
         self.label_1 = customtkinter.CTkLabel(master=self.frame_left,
                                               text="SecOps LookUp Tool",
                                               text_font=("Roboto Medium", 18))  # font name and size in px
-        self.label_1.grid(row=1, column=0, pady=10, padx=10)
+        self.label_1.grid(row=0, column=0, pady=10, padx=10)
 
-        self.button_1 = customtkinter.CTkButton(master=self.frame_left,
-                                                text="IPv4 LookUp",
-                                                command=self.buttonIP_event)
-        self.button_1.grid(row=2, column=0, pady=10, padx=20)
+        self.label_info_1 = customtkinter.CTkLabel(master=self.frame_left,
+                                                   text="Using APIVoid For IP and URL   \n" +
+                                                        "https://docs.apivoid.com/      \n\n" +
+                                                        "See requirements below.               ",
+                                                   height=100,
+                                                   corner_radius=6,  # <- custom corner radius
+                                                   fg_color=("white", "gray38"),  # <- custom tuple-color
+                                                   justify=tkinter.LEFT)
+        self.label_info_1.grid(column=0, row=3, sticky="nwe", padx=15, pady=15)
 
-        self.button_2 = customtkinter.CTkButton(master=self.frame_left,
-                                                text="URL LookUp",
-                                                command=self.buttonURL_event)
-        self.button_2.grid(row=3, column=0, pady=10, padx=20)
+
+        #self.button_1 = customtkinter.CTkButton(master=self.frame_left,
+         #                                       text="IPv4 LookUp",
+          #                                      command=self.buttonIP_event)
+        #self.button_1.grid(row=1, column=0, pady=10, padx=20)
+
+        #self.button_2 = customtkinter.CTkButton(master=self.frame_left,
+         #                                       text="URL LookUp",
+          #                                      command=self.buttonURL_event)
+        #self.button_2.grid(row=3, column=0, pady=10, padx=20)
+
+
         self.label_info_2 = customtkinter.CTkLabel(master=self.frame_left,
                                                    text="Requirements :    \n" +
                                                         "\n" +
                                                         "IPv4 - Column label :           'IP'   \n" +
-                                                        "          - Sheet name  label : 'IP' \n" +
+                                                      "          - Sheet name  label : 'IP' \n" +
                                                         "\n" +
                                                         "URL  - Column  label :          'URL' \n" +
                                                         "          - Sheet name  label : 'URL' \n",
                                                    text_font=("Roboto Medium",10),
-                                                   height=100,
+                                                   height=155,
                                                    corner_radius=6,  # <- custom corner radius
                                                    fg_color=("white", "gray38"),  # <- custom tuple-color
                                                    justify=tkinter.LEFT)
@@ -98,17 +112,31 @@ class App(customtkinter.CTk):
         self.frame_info.rowconfigure(0, weight=1)
         self.frame_info.columnconfigure(0, weight=1)
 
-        self.label_info_1 = customtkinter.CTkLabel(master=self.frame_info,
-                                                   text="Using APIVoid For IP and URL   \n" +
-                                                        "https://docs.apivoid.com/      \n" +
-                                                        "See requirements                 " ,
-                                                   height=100,
-                                                   corner_radius=6,  # <- custom corner radius
-                                                   fg_color=("white", "gray38"),  # <- custom tuple-color
-                                                   justify=tkinter.LEFT)
-        self.label_info_1.grid(column=0, row=0, sticky="nwe", padx=15, pady=15)
-        self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
-        self.progressbar.grid(row=1, column=0, sticky="ew", padx=15, pady=15)
+        #self.label_info_1 = customtkinter.CTkLabel(master=self.frame_info,
+         #                                          text="Using APIVoid For IP and URL   \n" +
+          #                                              "https://docs.apivoid.com/      \n" +
+           #                                             "See requirements                 " ,
+            #                                       height=100,
+             #                                      corner_radius=6,  # <- custom corner radius
+              #                                     fg_color=("white", "gray38"),  # <- custom tuple-color
+               #                                    justify=tkinter.LEFT)
+        #self.label_info_1.grid(column=0, row=0, sticky="nwe", padx=15, pady=15)
+
+        self.button_4 = customtkinter.CTkButton(master=self.frame_info,
+                                                text="IPv4 LookUp",
+                                                command=self.buttonIP_event)
+        self.button_4.grid(row=0, column=0, pady=10, padx=20)
+
+        self.button_14 = customtkinter.CTkButton(master=self.frame_info,
+                                                text="URL LookUp",
+                                                command=self.buttonURL_event)
+        self.button_14.grid(row=1, column=0, pady=10, padx=20)
+
+
+        #self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
+        #self.progressbar.grid(row=4, column=0, sticky="ew", padx=15, pady=15)
+
+
 
         # ============ frame_right ============
 
@@ -140,13 +168,13 @@ class App(customtkinter.CTk):
                                                            value=2)
         self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
+        #self.slider_2 = customtkinter.CTkSlider(master=self.frame_right,
+         #                                       command=self.progressbar.set)
+        #self.slider_2.grid(row=4, column=0, columnspan=2, pady=30, padx=20, sticky="we")
 
 
-
-        self.slider_2 = customtkinter.CTkSlider(master=self.frame_right,
-                                                command=self.progressbar.set)
-        self.slider_2.grid(row=5, column=0, columnspan=2, pady=10, padx=20, sticky="we")
-
+        self.progressbar = customtkinter.CTkProgressBar(master=self.frame_info)
+        self.progressbar.grid(row=6, column=0, sticky="ew", padx=15, pady=15)
 
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
@@ -158,6 +186,7 @@ class App(customtkinter.CTk):
                                                 border_width=2,  # <- custom border_width
                                                 fg_color=None,  # <- no fg_color
                                                 command=self.button_event)
+
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
         # set default values
@@ -176,11 +205,12 @@ class App(customtkinter.CTk):
 
         goodIPs = []
         badIPs = []
-
+        value = 0
         if self.radio_button_3.check_state == True:
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for ip in IP_list:
+                time.sleep(0.3)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
@@ -194,16 +224,22 @@ class App(customtkinter.CTk):
                 outfile.write(f'REVERSE DNS : {r.json()["data"]["report"]["information"]["reverse_dns"]}\n')
                 outfile.write(f'ANONIMITY : {r.json()["data"]["report"]["anonymity"]}\n')
                 print(IP_list.index(ip))
+                progress = (IP_list.index(ip) + 1) / (len(IP_list) +1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
             self.progressbar.set(1)
             outfile.close()
 
         elif self.radio_button_1.check_state == True:
             for ip in IP_list:
-                #time.sleep(0.5)
+                time.sleep(0.3)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 if r.json()['data']['report']['blacklists']['detections'] == 0:
                     goodIPs.append(ip)
+                progress = (IP_list.index(ip) + 1) / (len(IP_list) + 1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
 
             goodIPdata = pd.DataFrame({'Cleared IPs': goodIPs})
             writer = pd.ExcelWriter('Cleared.xlsx')
@@ -214,12 +250,14 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
         elif self.radio_button_2.check_state == True:
             for ip in IP_list:
-                #time.sleep(0.5)
+                time.sleep(0.5)
                 url = f'https://endpoint.apivoid.com/iprep/v1/pay-as-you-go/?key={apivoid_key}&ip={ip}'
                 r = requests.get(url)
                 if r.json()['data']['report']['blacklists']['detections'] > 0:
                     badIPs.append(ip)
-
+                progress = (IP_list.index(ip) + 1) / (len(IP_list) + 1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
             badIPdata = pd.DataFrame({'Risky IPs': badIPs})
             writer = pd.ExcelWriter('Risky.xlsx')
             badIPdata.to_excel(writer, sheet_name='RiskyIPsheet')
@@ -227,6 +265,7 @@ class App(customtkinter.CTk):
             worksheet.set_column(1, 1, 50)
             writer.save()
             self.progressbar.set(1)
+
 
     def buttonURL_event(self):
         apivoid_key = '902345018587a33f9c99134d8011a6739a1a7873'
@@ -240,17 +279,20 @@ class App(customtkinter.CTk):
         if self.radio_button_3.check_state:
             # open .txt to write report
             outfile = open('Report.txt', 'w')
-            for url in URL_list:
-                #time.sleep(0.5)
-                api = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={url}'
-                r = requests.get(api)
+            for URL in URL_list:
+                #time.sleep(0.3)
+                url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
+                r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
                 outfile.write(f'COUNTRY CODE : {r.json()["data"]["report"]["server_details"]["country_code"]}\n')
                 outfile.write(f'ISP : {r.json()["data"]["report"]["server_details"]["isp"]}\n')
                 outfile.write(f'IP: {r.json()["data"]["report"]["server_details"]["ip"]}\n')
                 outfile.write(f'DETECTIONS: {r.json()["data"]["report"]["domain_blacklist"]["detections"]}\n')
                 outfile.write(f'FILE TYPE: {r.json()["data"]["report"]["file_type"]}\n')
-                print(URL_list.index(url))
+                print(URL_list.index(URL))
+                progress = (URL_list.index(URL) + 1) / (len(URL_list) + 1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
             self.progressbar.set(1)
             outfile.close()
         elif self.radio_button_1.check_state:
@@ -260,6 +302,9 @@ class App(customtkinter.CTk):
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] == 0:
                     goodURLs.append(URL)
+                progress = (URL_list.index(URL) + 1) / (len(URL_list) + 1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
 
             goodURLdata = pd.DataFrame({'Cleared URLs': goodURLs})
             writer = pd.ExcelWriter('Cleared.xlsx')
@@ -269,12 +314,15 @@ class App(customtkinter.CTk):
             writer.save()
             self.progressbar.set(1)
         elif self.radio_button_2.check_state:
-            for url in URL_list:
+            for URL in URL_list:
                 #time.sleep(0.5)
-                api = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={url}'
-                r = requests.get(api)
+                url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
+                r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] > 0:
                     badURLs.append(url)
+                progress = (URL_list.index(URL) + 1) / (len(URL_list) + 1)
+                self.progressbar.update_idletasks()
+                self.progressbar.set(progress)
 
             badURLdata = pd.DataFrame({'Risky URLs': badURLs})
             writer = pd.ExcelWriter('Risky.xlsx')
