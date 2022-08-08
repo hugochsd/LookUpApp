@@ -7,7 +7,7 @@ import pandas as pd
 import time
 import requests
 
-customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
+#customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
@@ -75,7 +75,7 @@ class App(customtkinter.CTk):
                                                    justify=tkinter.LEFT)
         self.label_info_2.grid(column=0, row=8, sticky="nwe", padx=15, pady=15)
 
-        self.switch_1 = customtkinter.CTkSwitch(master=self.frame_left,text="Dark Mode", offvalue="light", onvalue="Dark", command=self.change_appearance_mode)
+        self.switch_1 = customtkinter.CTkSwitch(master=self.frame_left,text="Dark Mode", offvalue="Light", onvalue="Dark", command=self.change_appearance_mode)
         self.switch_1.grid(row = 10, column = 0, pady=12, padx=10)
 
         # ============ frame_right ============
@@ -247,10 +247,11 @@ class App(customtkinter.CTk):
             # open .txt to write report
             outfile = open('Report.txt', 'w')
             for URL in URL_list:
-                time.sleep(0.5)
+                time.sleep(1.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 outfile.write('\n#####################################################################\n')
+                outfile.write(f'URL : {URL}\n')
                 outfile.write(f'COUNTRY CODE : {r.json()["data"]["report"]["server_details"]["country_code"]}\n')
                 outfile.write(f'ISP : {r.json()["data"]["report"]["server_details"]["isp"]}\n')
                 outfile.write(f'IP: {r.json()["data"]["report"]["server_details"]["ip"]}\n')
@@ -264,7 +265,7 @@ class App(customtkinter.CTk):
             outfile.close()
         elif self.radio_button_1.check_state:
             for URL in URL_list:
-                time.sleep(0.5)
+                time.sleep(1.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] == 0:
@@ -282,7 +283,7 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
         elif self.radio_button_2.check_state:
             for URL in URL_list:
-                time.sleep(0.5)
+                time.sleep(1.5)
                 url = f'https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key={apivoid_key}&url={URL}'
                 r = requests.get(url)
                 if r.json()['data']['report']['domain_blacklist']['detections'] > 0:
@@ -300,11 +301,11 @@ class App(customtkinter.CTk):
             self.progressbar.set(1)
 
     def change_appearance_mode(self):
-        if customtkinter.get_appearance_mode() == "Light":
-            value = "Dark"
-            customtkinter.set_appearance_mode(value)
-        elif customtkinter.get_appearance_mode() == "Dark":
+        if customtkinter.get_appearance_mode() == "Dark":
             value = "Light"
+            customtkinter.set_appearance_mode(value)
+        elif customtkinter.get_appearance_mode() == "Light":
+            value = "Dark"
             customtkinter.set_appearance_mode(value)
 
 
