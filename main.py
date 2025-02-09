@@ -165,7 +165,7 @@ class App(customtkinter.CTk):
         print("Button pressed")
 
     def buttonIP_event(self):
-        apivoid_key = '902345018587a33f9c99134d8011a6739a1a7873'
+        apivoid_key = ''
         self.filename = filedialog.askopenfilename(initialdir="C:/", title="Select A File", filetypes=(("Excel (.xlsx)", "*.xlsx"), ("All Files", "*.*")))
         IPdf = pd.read_excel(self.filename, "IP")
         IP_list = IPdf['IP'].values.tolist()
